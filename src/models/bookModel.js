@@ -35,7 +35,7 @@ const bookSchema = new mongoose.Schema(
     },
     quantity: {
       type: Number,
-      required: [true, 'A book should have the Number of stocks available'],
+      required: [true, 'A book should have the number of stocks available'],
     },
     imageCover: {
       type: String,

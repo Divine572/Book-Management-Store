@@ -2,7 +2,11 @@
 
 ## Overview
 
-This project is A Book Management Store API which includes resources or endpoints that allows book sellers sell their books online (more like an eccommerce marketplace). The endpoints implemented: - Authenticaton - Book - Review
+This project is A Book Management Store API which includes resources or endpoints that allows book sellers sell their books online (more like an eccommerce marketplace). The endpoints implemented:
+
+- Authenticaton
+- Book
+- Review
 
 ## Built With
 

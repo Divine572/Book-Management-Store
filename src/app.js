@@ -4,6 +4,7 @@ const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 
 const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 
 const bookRouter = require('./routes/bookRoutes');
 
@@ -42,5 +43,7 @@ app.use('/api/v1/books', bookRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));
 });
+
+app.use(globalErrorHandler);
 
 module.exports = app;
