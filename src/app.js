@@ -7,6 +7,7 @@ const swaggerJsDoc = require('swagger-jsdoc');
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
 
+const userRouter = require('./routes/userRoutes');
 const bookRouter = require('./routes/bookRoutes');
 
 const app = express();
@@ -41,6 +42,7 @@ app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
 
+app.use('/api/v1/users', userRouter)
 app.use('/api/v1/books', bookRouter);
 app.all('*', (req, res, next) => {
   next(new AppError(`Can't find ${req.originalUrl} on the server`, 404));
