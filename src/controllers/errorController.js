@@ -6,6 +6,14 @@ const handleValidationErrorDB = err => {
   return new AppError(message, 400);
 };
 
+const handleDuplicateFieldDB = err => {
+  const value = err.keyValue;
+  const message = `Duplicate field value (${Object.values(
+    value
+  )}), Please use another value!`;
+  return new AppError(message, 400);
+};
+
 const sendErrorDev = (err, req, res) => {
   return res.status(err.statusCode).json({
     status: err.status,
@@ -41,6 +49,7 @@ module.exports = (err, req, res, next) => {
     error.message = err.message;
 
     if (err.name === 'ValidationError') error = handleValidationErrorDB(error);
+    if (err.code === 11000) error = handleDuplicateFieldDB(error);
 
     sendErrorProd(error, req, res);
   }
