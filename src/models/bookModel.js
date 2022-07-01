@@ -5,6 +5,7 @@ const bookSchema = new mongoose.Schema(
     name: {
       type: String,
       trim: true,
+      unique: true,
       maxlength: [40, 'A book must not contain more than 40 characters'],
       minlength: [4, 'A book must not contain more than 4 characters'],
       required: [true, 'Book name is required to create a Book'],
