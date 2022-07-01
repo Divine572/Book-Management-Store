@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const cookieParser = require('cookie-parser');
 const swaggerUI = require('swagger-ui-express');
 const swaggerJsDoc = require('swagger-jsdoc');
 
@@ -38,6 +39,7 @@ app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(specs));
 // body parser
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
+app.use(cookieParser());
 
 app.use('/api/v1/books', bookRouter);
 app.all('*', (req, res, next) => {
