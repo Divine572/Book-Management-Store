@@ -56,7 +56,7 @@ exports.login = catchAsync(async (req, res, next) => {
 
   const user = await User.findOne({ email }).select('+password');
 
-  if (!user || !(await user.correctPassword(password, user.passoword))) {
+  if (!user || !(await user.correctPassword(password, user.password))) {
     return next(new AppError('Incorrect email or password', 401));
   }
 
@@ -78,7 +78,11 @@ exports.protect = catchAsync(async (req, res, next) => {
     return next(new AppError('Please login to get access', 401));
   }
 
-  const decoded = await promisify(jwt.sign)(token, process.env.JWT_SECRET_KEY);
+  const decoded = await promisify(jwt.verify)(
+    token,
+    process.env.JWT_SECRET_KEY
+  );
+  // console.log(decoded);
 
   const currentUser = await User.findById(decoded.id);
 
